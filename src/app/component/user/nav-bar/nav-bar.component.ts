@@ -8,6 +8,10 @@ import { UserSettingComponent } from '../user-setting/user-setting.component';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../../../service/localstorage/local-storage.service';
 import { JwtService } from '../../../service/jwt/jwt.service';
+import { UserService } from 'src/app/service/user/user.service';
+import { AchievementService } from 'src/app/service/achievement/achievement.service';
+import { HabitStatisticService } from 'src/app/service/habit-statistic/habit-statistic.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,10 +19,14 @@ import { JwtService } from '../../../service/jwt/jwt.service';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
+  readonly notificationIcon = 'assets/img/notification-icon.png';
+  readonly userAvatar = 'assets/img/user-avatar.png';
+  readonly arrow = 'assets/img/arrow.png';
+  dropdownVisible: boolean;
   firstName: string;
   userRole: string;
   userId: number;
-  habitId: number;
+  isLoggedIn: boolean;
 
   constructor(
     private modalService: ModalService,
@@ -27,19 +35,41 @@ export class NavBarComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private jwtService: JwtService,
     private router: Router,
+    private userService: UserService,
+    private achievementService: AchievementService,
+    private habitStatisticService: HabitStatisticService
   ) { }
 
+  ngOnInit(): void {
+    this.dropdownVisible = false;
+    this.localStorageService.firstNameBehaviourSubject.subscribe(firstName => this.firstName = firstName);
+    this.localStorageService.userIdBehaviourSubject
+      .pipe(
+        filter(userId => userId !== null && !isNaN(userId))
+      )
+      .subscribe(userId => {
+        this.userId = userId;
+        this.isLoggedIn = true;
+      });
+    this.userRole = this.jwtService.getUserRole();
+  }
+
+  toggleDropdown(): void {
+    this.dropdownVisible = !this.dropdownVisible;
+  }
+
   openDialog(): void {
+    this.dropdownVisible = false;
     const dialogRef = this.dialog.open(FavoritePlaceComponent, {
       width: '700px'
     });
     dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
       this.favoritePlaceService.getFavoritePlaces();
     });
   }
 
   openSettingDialog(): void {
+    this.dropdownVisible = false;
     const dialogRef = this.dialog.open(UserSettingComponent, {
       width: '700px'
     });
@@ -48,13 +78,8 @@ export class NavBarComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.localStorageService.firstNameBehaviourSubject.subscribe(firstName => this.firstName = firstName);
-    this.localStorageService.userIdBehaviourSubject.subscribe(userId => this.userId = userId);
-    this.userRole = this.jwtService.getUserRole();
-  }
-
   openDialogProposeCafeComponent(): void {
+    this.dropdownVisible = false;
     const dialogRef = this.dialog.open(ProposeCafeComponent, {
       width: '800px',
       data: 5
@@ -64,10 +89,14 @@ export class NavBarComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+
   private signOut() {
+    this.dropdownVisible = false;
+    this.isLoggedIn = false;
     this.localStorageService.clear();
-    this.router.navigate(['/'])
-      .then(success => console.log('redirect has succeeded ' + success))
-      .catch(fail => console.log('redirect has failed ' + fail));
+    this.userService.onLogout();
+    this.habitStatisticService.onLogout();
+    this.achievementService.onLogout();
+    this.router.navigateByUrl('/welcome').then(r => r);
   }
 }

@@ -11,12 +11,19 @@ import { RestoreFormComponent } from './component/user/restore-form/restore-form
 import { FeedbacksComponent } from './component/admin/feedbacks/feedbacks.component';
 import { UserHabitPageComponent } from './component/user/habit/user-habit-page/user-habit-page.component';
 import { Routes } from '@angular/router';
+import { HomepageComponent } from './component/general/homepage/homepage/homepage.component';
+import { AuthPageGuardService } from './service/route-guards/auth-page-guard.service';
+import { HomePageGuardService } from './service/route-guards/home-page-guard.service';
+import { AppComponent } from './app.component';
 
 export const router: Routes = [
-  // { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '',
+    component: AppComponent,
+    canActivate: [HomePageGuardService]
+  },
   {
-    path: '',
-    component: MapComponent
+    path: 'welcome',
+    component: HomepageComponent,
   },
   {
     path: 'auth',
@@ -29,12 +36,17 @@ export const router: Routes = [
     ]
   },
   {
+    path: 'map',
+    component: MapComponent
+  },
+  {
     path: '',
     component: FilterComponent
   },
   {
     path: ':id/habits',
-    component: UserHabitPageComponent
+    component: UserHabitPageComponent,
+    canActivate: [AuthPageGuardService]
   },
   {
     path: 'admin',

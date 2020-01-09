@@ -1,4 +1,51 @@
 {
+  "top-bar": {
+    "text-before": "Привет! Это трекер эко-привычек. ",
+    "sign-up": "Зарегистрируйся ",
+    "text-within": "что бы создать собственный ",
+    "or": "или ",
+    "sign-in": "входи",
+    "text-after": ", если ты уже с нами.",
+    "hello": "Привет, ",
+    "welcome-back": "! С возвращением!"
+  },
+  "homepage": {
+    "general": {
+      "button-start-habit": "Начать формировать привычку!"
+    },
+    "header": {
+      "caption": "Новый способ воспитать в себе полезные привычки",
+      "content": "В Украине каждый человек ежегодно использует более 500 одноразовых пакетов и около 70 бумажных стаканчиков. Достаточно брать с собой эко-сумку и свою чашку и это поможет сохранить жизни 3-х дельфинов, одной черепашки и сохранить чистыми воды океанов для следующего поколения."
+    },
+    "stats": {
+      "caption-before": "Нас",
+      "caption-after": "и сегодня мы",
+      "bag-stat-before": "Не взяли",
+      "bag-stat-after": "пакетов",
+      "bag-question": "А сколько пакетов ты не взял сегодня?",
+      "bag-link": "тут можна купить эко-сумочки",
+      "cup-stat-before": "Не выбросили",
+      "cup-stat-after": "стаканчиков",
+      "cup-question": "А сколько стаканчиков не выбросил сегодня ты?",
+      "cup-link": "заведения, которые делают скидку на напиток в свою кружку"
+    },
+    "eco-news": {
+      "caption": "Эко-новости",
+      "read-more": "Читать дальше",
+      "read-all": "Читать все новости"
+    },
+    "eco-advices": {
+      "caption": "Эко-советы"
+    },
+    "subscription": {
+      "caption": "Получать интерестные новости",
+      "content": "Подпишитесь на рассылку и всегда будьте в курсе новостей и обновлений",
+      "placeholder": "Введите ваш email",
+      "validation-error": "Некорректная электронная почта",
+      "subscription-error": "Ошибка, возможно вы уже подписаны",
+      "button-subscribe": "Подписаться!"
+    }
+  },
   "admin-nav": {
     "places": "Места",
     "users": "Пользователи",
@@ -203,12 +250,12 @@
     "map": {
       "filter-by": "Фильтр",
       "searching-for-a-place": "Поиск места",
-      "places": "Places",
-      "show-all": "Show all",
-      "clear-filters": "Clear Filters",
-      "rate": "Rate:",
-      "comments": "Comments:",
-      "add-comment": "Add comment",
+      "places": "Места",
+      "show-all": "Показать все",
+      "clear-filters": "Сбросить фильтры",
+      "rate": "Показатель:",
+      "comments": "Комментарии:",
+      "add-comment": "Добавить комментарий",
       "navigate-to-place": "Проложить маршрут к месту",
       "close-navigation": "Закрыть навигацию",
       "discount": "скидка",
@@ -268,11 +315,11 @@
       "submit": "Подтвердить"
     },
     "restore-form": {
-      "password": "Password",
-      "password-is-required": "Password is required.",
-      "password-must-be-at-least-8-characters-long": "Password must be at least 8 characters long.",
-      "confirm-password": "Confirm password",
-      "submit": "Submit"
+      "password": "Пароль",
+      "password-is-required": "Необходим пароль.",
+      "password-must-be-at-least-8-characters-long": "Пароль должен содержать не менее 8 символов.",
+      "confirm-password": "Подтвердите пароль",
+      "submit": "Подтвердить"
     },
     "user-setting": {
       "user-settings": "Настройки профиля",
@@ -307,10 +354,10 @@
     "lower-nav-bar": {
       "home": "Главная",
       "about-us": "О нас",
-      "eco-events": "Эко мероприятия",
-      "tips": "Полезные советы",
+      "eco-events": "Эко-новости",
+      "tips": "Эко-советы",
       "map": "Карта",
-      "my-habits": "Мои привычки"
+      "my-habits": "Мой кабинет"
     },
     "user-goals": {
       "add-goal": {
